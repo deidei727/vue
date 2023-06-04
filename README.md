@@ -132,7 +132,68 @@ onMounted(()=>{
 })
 ```
 
-## pubsub
+## v-model
+v-model 可以同步表单数据 默认的是**v-model:value** 简写成v-model
+同时v-model还可以实现父子组件的数据同步 默认的是**v-model:modelValue** 简写成v-model
+还可以自定义数据 **eg:v-model:currentPage=currentPage** 
+
+父组件
+```
+<Child1 v-model="money"/>
+
+import {ref} from'vue'
+let money=ref(100)
+```
+
+
+子组件
+```
+<div>
+    <p>我有{{ modelValue }}元</p>
+    <button @click="handler">点击和父亲同步</button>
+</div>
+
+const $emit =defineEmits(['update:modelValue'])
+const props = defineProps({
+    modelValue:{
+        type:Number,
+        default:0
+    }
+})
+const handler = ()=>{
+    $emit('update:modelValue', props.modelValue+10);
+}
+
+```
+
+传递多个v-model
+
+父组件
+```
+ <Child2 v-model:prePageNO="prePageNO" v-model:nextPageNO="nextPageNO"/>
+
+ let prePageNO=ref(12)
+let nextPageNO=ref(14)
+```
+
+子组件
+```
+<button @click="pre">上一页{{ prePageNO }}</button>
+<button @click="next">下一页{{ nextPageNO }}</button>
+
+
+let $emit = defineEmits(['update:prePageNO', 'update:nextPageNO'])
+let props = defineProps(['prePageNO', 'nextPageNO'])
+const pre = () => {
+  $emit('update:prePageNO', props.prePageNO - 1)
+}
+const next = () => {
+  $emit('update:nextPageNO', props.nextPageNO + 1)
+}
+```
+
+
+## attrs-listeners
 
 ## vuex
 
