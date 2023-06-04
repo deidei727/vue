@@ -8,10 +8,10 @@ export default [
       path: '/event_pre',
       component: () => import('@/views/02_custom-event/EventTest.vue'),
     },
-    // {
-    //   path: '/bus_pre',
-    //   component: () => import('@/views/03_event-bus/EventBusTest.vue'),
-    // },
+    {
+      path: '/bus_pre',
+      component: () => import('@/views/03_event-bus/EventBusTest.vue'),
+    },
     // {
     //   path: '/model_pre',
     //   component: () => import('@/views/04_v-model/ModelTest.vue'),

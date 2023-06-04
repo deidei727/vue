@@ -2,7 +2,7 @@
     <div class="second">
         我是子组件2号
         <button @click="send">点我</button>
-        <!-- <button @click="emits('click','nihao')">点我执行自定义事件</button> -->
+        <button @click="emits('click','nihao')">点我执行自定义事件</button> 
     </div>
 </template>
 

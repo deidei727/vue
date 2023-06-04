@@ -62,7 +62,7 @@ const change=()=>{
   <Event1 @click="handle1"></Event1>
 ```
 
-### 子组件给父组件传递数据
+## 子组件给父组件传递数据
 ```
 let count =ref(0)
 let emits = defineEmits(["sendData"])
@@ -86,8 +86,51 @@ const send=()=>{
 let emits = defineEmits(["sendData","click"])
 ```
 
-## 全局事件总线$bus
+## 全局事件总线$bus （兄弟组件间通信）
+在vue2中可以通过vm和vc之间的关系，推出全局事件总线，实现任意组件间的通信。但是在vue3中没有vue构造函数，导致没有vm
+没有vue原型对象，同时vue3是组合式api, 没有this的写法。所以如果直接在vue3中使用全局事件总线有点不现实，可以通过mitt插件进行实现
+### 引入mitt
+$bus 上有on ，emit，off方法
+on：绑定事件，用来接收数据 在组件挂在完毕的时候就要给组件绑定事件来接收数据
+emit：发送时间，用于传递数据
 
+```
+import mitt from 'mitt';
+type Events = {
+    foo: string;
+    bar?: number;
+  };
+const $bus = mitt<Events>();
+ export default $bus
+ ```
+### 使用
+子组件1
+
+```
+ <button @click.once="present">我要送个妹妹一个礼物</button>
+
+ import $bus from '../../bus';
+ const present=()=>{
+   // 第一个参数：事件类型 第二个参数：发送数据
+    $bus.emit("bike",'自行车')
+ }
+```
+
+子组件2
+
+```
+<p>姐姐送给我的礼物：{{ bikeForMeimei }}</p>
+import { onMounted ,ref} from 'vue';
+import $bus from '../../bus';
+const bikeForMeimei=ref('');
+onMounted(()=>{
+    // 第一个参数：事件类型 第二个参数：事件回调
+    $bus.on('bike', function(bike:string) {
+        bikeForMeimei.value=bike
+        console.log(bike)
+    })
+})
+```
 
 ## pubsub
 
