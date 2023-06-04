@@ -4,10 +4,10 @@ export default [
       path: '/props_pre',
       component: () => import('@/views/01_props/Father.vue'),
     },
-    // {
-    //   path: '/event_pre',
-    //   component: () => import('@/views/02_custom-event/EventTest.vue'),
-    // },
+    {
+      path: '/event_pre',
+      component: () => import('@/views/02_custom-event/EventTest.vue'),
+    },
     // {
     //   path: '/bus_pre',
     //   component: () => import('@/views/03_event-bus/EventBusTest.vue'),

@@ -1,5 +1,8 @@
 <template>
     <div class="father">
+        <h1>
+            我是props父组件给子组件传递数据
+        </h1>
        <h1>
         我是父组件
        </h1>

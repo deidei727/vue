@@ -5,8 +5,8 @@
     <h1>组件间通信（共9种）</h1>
     <div>
       <router-link to="/props_pre">props</router-link>&nbsp;&nbsp;
-      <!-- <router-link to="/event_pre">custom event</router-link>&nbsp;&nbsp;
-      <router-link to="/bus_pre">event bus</router-link>&nbsp;&nbsp;
+      <router-link to="/event_pre">custom event</router-link>&nbsp;&nbsp; 
+      <!-- <router-link to="/bus_pre">event bus</router-link>&nbsp;&nbsp; 
       <router-link to="/model_pre">v-model</router-link>&nbsp;&nbsp;
       <router-link to="/attrs-listeners_pre">useAttrs</router-link>&nbsp;&nbsp;
       <router-link to="/ref-parent_pre">ref$parent</router-link>&nbsp;&nbsp;
