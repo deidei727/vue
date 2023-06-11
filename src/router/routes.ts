@@ -16,10 +16,10 @@ export default [
       path: '/model_pre',
       component: () => import('@/views/04_v-model/ModelTest.vue'),
     },
-    // {
-    //   path: '/attrs-listeners_pre',
-    //   component: () => import('@/views/05_attrs-listeners/AttrsListenersTest.vue'),
-    // },
+    {
+      path: '/attrs-listeners_pre',
+      component: () => import('@/views/05_attrs-listeners/AttrsListenersTest.vue'),
+    },
     // {
     //   path: '/ref-parent_pre',
     //   component: () => import('@/views/06_ref-children-parent/RefChildrenParentTest.vue'),

@@ -193,7 +193,35 @@ const next = () => {
 ```
 
 
-## attrs-listeners
+## attrs-listeners（不仅可以传递属性，还可以传递方法）
+**注意：**useAttrs和props都可以接受属性，但是useAttrs的优先级低于props的优先级，当二者同时使用的时候，通过props获取到的属性，useAttrs将不会获取到
+在vue3中使用**useAttrs**获取父元素给子元素传递的数据
+
+### 父组件
+父组件中使用子组件
+```
+import dataTest from './DataTest.vue'
+
+ <dataTest type="success" :icon="Search"> </dataTest>
+ ```
+
+### 子组件
+
+```
+//:="$attrs"这种方式会将所有的父组件传递过来的属性拿过来
+   <el-button :="$attrs"></el-button>
+
+   import {useAttrs } from 'vue'
+   let $attrs = useAttrs()
+```
+```
+   console.log($attrs)
+
+   结果：Proxy(Object) {type: 'success', icon: {…}, __vInternal: 1}
+
+```
+
+
 
 ## vuex
 
