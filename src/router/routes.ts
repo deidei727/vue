@@ -20,21 +20,21 @@ export default [
       path: '/attrs-listeners_pre',
       component: () => import('@/views/05_attrs-listeners/AttrsListenersTest.vue'),
     },
-    // {
-    //   path: '/ref-parent_pre',
-    //   component: () => import('@/views/06_ref-children-parent/RefChildrenParentTest.vue'),
-    // },
-    // {
-    //   path: '/provide-inject_pre',
-    //   component: () => import('@/views/07_provide-inject/ProvideInjectTest.vue'),
-    // },
-    // {
-    //   path: '/vuex_pre',
-    //   component: () => import('@/views/08_pinia/index.vue'),
-    // },
-    //  {
-    //   path: '/slot_pre',
-    //   component: () => import('@/views/09_slot/SlotTest.vue'),
-    // },
+    {
+      path: '/ref-parent_pre',
+      component: () => import('@/views/06_ref-children-parent/RefChildrenParentTest.vue'),
+    },
+    {
+      path: '/provide-inject_pre',
+      component: () => import('@/views/07_provide-inject/ProvideInjectTest.vue'),
+    },
+    {
+      path: '/vuex_pre',
+      component: () => import('@/views/08_pinia/index.vue'),
+    },
+     {
+      path: '/slot_pre',
+      component: () => import('@/views/09_slot/SlotTest.vue'),
+    },
   ]
   

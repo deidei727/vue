@@ -193,7 +193,7 @@ const next = () => {
 ```
 
 
-## attrs-listeners（不仅可以传递属性，还可以传递方法）
+## attrs-listeners（不仅可以传递属性，还可以传递方法）：包含父作用域里除 class 和 style 除外的非 props 属性集合
 **注意：**useAttrs和props都可以接受属性，但是useAttrs的优先级低于props的优先级，当二者同时使用的时候，通过props获取到的属性，useAttrs将不会获取到
 在vue3中使用**useAttrs**获取父元素给子元素传递的数据
 
@@ -221,11 +221,53 @@ import dataTest from './DataTest.vue'
 
 ```
 
+## ref进行 子=>父 ,$parent 父=>子 传递信息（获取子组件信息后，可对其进行更改）
+**在子组件上定义ref，并且声明变量的时候，二者要保持一致**
+### 父组件
+```
+ <Child1 ref="son"></Child1>
 
+ let son=ref()
+```
 
-## vuex
+此时我们可以通过son.value访问子组件，但是由于子组件中内部的数据不会对外暴露，我们目前是无法访问到子组件的数据的
+可以通过在子组件中进行暴露属性或者方法
 
-## ref
+```
+defineExpose({
+    childMoney
+})
+```
+这样我们就可以在父组件中访问到子组件的属性或者方法，同时注意，我们访问到的属性，可以在父组件中对其进行更改
+
+### $parent 通信(父给子信息)
+在子组件想要获取父组件的时候,可以使用$parent获取当前组件的父组件，同时我们可以在父组件中暴露属性和方法
+```
+ <button @click="get($parent)"> 爸爸给我钱</button>
+let get= ($parent)=>{
+    console.log($parent)
+    dauMoney.value+=100
+
+    $parent.money-=100
+    console.log($parent.childMoney)
+}
+```
+
+## provide-inject（父=>子，可以修改数据，并且可以跨组件：爷爷可以给孙子传递数据）
+通过provide进行发送数据（只可父给子传递数据）
+```
+provide发送数据的格式：键值对的形式 （key，value）
+provide('name',things)
+这里的name是key，你自己定义的，things是value，我们要传递的数据
+```
+
+inject接收数据
+```
+inject('name')
+使用inject()传递数据，里面放key值，就可以获得对应的value值
+```
+
+## pinia
 
 ## slot
 
