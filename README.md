@@ -267,7 +267,45 @@ inject('name')
 使用inject()传递数据，里面放key值，就可以获得对应的value值
 ```
 
-## pinia
+## pinia（可以实现任意组件间通信）:集中式管理，state action getters
+
+```
+定义大仓库并将其导出 （大仓库管理小仓库）
+import {createPinia} from 'pinia';
+let store = createPinia()
+export default store;
+```
+
+定义小仓库 并将小仓库导出，defineStore（）方法第一个参数是小仓库的名称，第二个参数是小仓库的配置对象（state，actions，getters）
+```
+import { defineStore } from "pinia"; 
+
+let useInfo = defineStore('userInfo',{
+    state: ()=>{
+        return {
+            count:123
+        }
+    },
+    actions: ()=>{
+
+    },
+    getters: ()=>{
+
+    },
+
+})
+export default useInfo
+```
+
+
+defineStore方法返回的是一个函数，当我们在使用的时候，首先要获取小仓库的对象，我们所有的属性全在小仓库的对象中，要使用的时候，直接获取即可
+```
+import useInfo from '../../store/modules/info'
+let useInfoDate= useInfo()
+
+//使用
+ <span>这是数据:{{ useInfoDate.count }}</span> <br>
+```
 
 ## slot
 
