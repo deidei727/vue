@@ -2,16 +2,19 @@
     <div class="dau">
         <h3>我是子组件2</h3>
         <hr>
-        <span> 这是数据: {{ useInfoDate.count }}</span>
+        <span> 这是数据: {{ todosStore.todos }}</span><br>
+        <span>{{ todosStore.count }}</span>
+        <button @click="add">加一</button>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import useInfo from '../../store/modules/info';
-let useInfoDate =useInfo()
+import todosPinia from '../../store/modules/todos';
+let todosStore =todosPinia()
 
-
+const add=()=>{
+    todosStore.count++
+}
 
 </script>
 

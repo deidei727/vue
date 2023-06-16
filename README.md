@@ -268,9 +268,9 @@ inject('name')
 ```
 
 ## pinia（可以实现任意组件间通信）:集中式管理，state action getters
-
-```
+### 选项式api的写法，会对pinia中的数据进行更改
 定义大仓库并将其导出 （大仓库管理小仓库）
+```
 import {createPinia} from 'pinia';
 let store = createPinia()
 export default store;
@@ -307,6 +307,103 @@ let useInfoDate= useInfo()
  <span>这是数据:{{ useInfoDate.count }}</span> <br>
 ```
 
+
+### 组合式api的写法（也可以更改属性值，双向的）
+defineStore的第二个参数是一个函数，必须返回一个对象（这个返回的对象，就是组件中想要使用的属性或者方法）
+```
+import { defineStore } from "pinia";
+import { ref } from "vue";
+let todosPinia=defineStore('todos',()=>{
+    let todos=ref([{id:1,title:"吃饭"},{id:2,title:"睡觉"},{id:3,title:"上厕所"}])
+    // 必须返回一个对象：属性和方法供组件进行使用
+    return {
+        todos
+
+    }
+
+})
+export default todosPinia;
+```
+使用方法（和选项式api相同）
+```
+import todosPinia from '../../store/modules/todos';
+let todosStore =todosPinia()
+
+const add=()=>{
+    todosStore.count++
+}
+```
 ## slot
+插槽分：默认插槽、具名插槽、作用域插槽
+
+### 默认插槽
+
+
+父组件
+```
+ <Child1>
+    <div>
+       <pre>我是默认插槽的内容</pre>
+    </div>
+</Child1>
+```
+子组件
+```
+  <div class="child">
+    <h3>我是子组件儿子</h3>
+    <hr>
+    <slot></slot>
+    <h3>结束</h3>
+  </div>
+```
+
+### 具名插槽
+
+具名插槽 给插槽附上name属性
+```
+ <slot name="a"></slot>
+```
+使用的时候，使用v-slot:<名称> 的方式，进行使用，
+也可以简写成 #<名称>
+```
+ <template v-slot:a>
+    <div>
+       <pre> 我是具名插槽填充内容
+        a</pre>
+    </div>
+ </template>
+ <template #b>
+    <div>
+       <pre> 我是具名插槽填充内容b</pre>
+    </div>
+ </template>
+```
+
+### 作用域插槽
+作用域插槽：可以传递数据的插槽，子组件可以将数据传递给父组件，并且父组件可以决定数组在子组件中以何种方式展示
+父组件获取到子组件传递的数据，并且可以决定展示的形式eg：这里是使用p标签,并且根据是否完成更改样式
+```
+ <Child2 :todos="todos">
+    <template v-slot="{$todosRow,$todosIndex}"> 
+        <p :style="{color:$todosRow?.done?'red':'green'}">
+            {{$todosIndex}}-{{$todosRow?.title}}
+        </p>
+    </template>
+ </Child2>
+```
+
+子组件
+```
+ <ul>
+    <li v-for="(item,index) in todos" :key="index">
+    //子组件通过slot标签进行给父组件传递数据，返回的结果是对象的形式，$todosRow是key的形式，item是value的形式。
+      <slot :$todosRow="item"  :$todosIndex="index"></slot>
+    </li>
+ </ul>
+```
+
+```
+```
+
 
 
