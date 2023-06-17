@@ -2,7 +2,7 @@
     <div class="son">
         <h1>我是子组件</h1>
         <h2>这是父组件传递过来的数据：{{ props.fatherLove }}</h2>
-        <button @click="change">点击</button>
+        <!-- <button @click="change">点击</button> -->
     </div>
 </template>
 
@@ -10,7 +10,7 @@
 
 const props=defineProps(["fatherLove"]);
 // const change=()=>{
-//     // props.fatherLove+='nihao'
+//     props.fatherLove+='nihao'
 //     console.log(props.fatherLove)
 // }
 </script>
